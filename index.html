@@ -119,6 +119,7 @@
     <p><span class="highlight">while (true)</span> adalah jenis perulangan <strong>tak terbatas (infinite loop)</strong> yang akan terus berjalan <strong>selamanya</strong>, kecuali diberi <strong>perintah untuk keluar</strong> seperti <code>break</code>.</p>
     <p>Perulangan ini akan terus mengeksekusi blok kode di dalamnya selamanya karena kondisinya selalu bernilai <strong>True</strong>. Ini sangat berguna saat Anda ingin <strong>kode terus berjalan sampai ada kondisi lain yang memaksanya untuk berhenti</strong>, seperti dengan menggunakan <strong>break</strong> atau <strong>return</strong>. </p>
 
+
     <h2>✅ Kapan Digunakan?</h2>
     <ul>
       <li>Menjalankan program terus-menerus sampai ada kondisi tertentu (misalnya input pengguna).</li>
@@ -126,14 +127,81 @@
       <li>Membuat menu interaktif yang terus muncul hingga user memilih keluar.</li>
     </ul>
 
-    <h2>💡 Struktur Umum <code>while (true)</code></h2>
+    
+
+<h2>💡 Sintaks Umum <code>while (true)</code></h2>
     <pre><code>while (true)
 {
-    // Blok kode yang terus diulang
-    // Gunakan 'break' untuk keluar dari loop
+    // Mengeksekusi kode yang ada di dalam loop
 }</code></pre>
 
-    <h2>💻 Contoh Program 1: Perulangan Tak Terbatas dengan <code>break</code></h2>
+<ul>
+<li>true: Kondisi dalam perulangan yang selalu bernilai benar. Karena nilai true selalu benar, maka perulangan ini akan terus dijalankan tanpa henti.</li>
+<li>while: Perintah untuk memulai perulangan dengan kondisi tertentu.</li>
+</ul>
+
+<h2>🔄 Cara Kerja:</h2>
+<ul>
+    <li><strong>Periksa kondisi</strong>: Sebuah <em>while loop</em> akan mengecek kondisi yang diberikan. Dalam hal ini, kondisi true selalu benar, sehingga perulangan akan terus dilakukan</li>
+    <li><strong>Eksekusi kode di dalam <em>loop</em></strong>: Kode dalam blok {} akan dijalankan berulang kali.</li>
+    <li><strong>Iterasi ulang</strong>: Setelah selesai menjalankan kode dalam loop, perulangan akan mengecek kondisi lagi. Karena kondisi true, perulangan berlanjut.</li>
+</ul>
+
+<h2>💡 Contoh Penggunaan</h2>
+<p><span class="highlight"><h2>1. 💻Contoh Infinite Loop: </h2></span> <br> Berikut adalah contoh sederhana dari perulangan while (true) yang menunggu input pengguna dan keluar saat mengetik "exit":</p>
+<pre><code>using System;
+
+  class Program
+  {
+      static void Main()
+      {
+          while (true)
+          {
+              Console.Write("Ketik 'exit' untuk keluar: ");
+              string userInput = Console.ReadLine();
+              
+              if (userInput.ToLower() == "exit")
+              {
+                  Console.WriteLine("Keluar dari program.");
+                  break;  // Menghentikan loop
+              }
+              else
+              {
+                  Console.WriteLine($"Kamu mengetik: {userInput}");
+              }
+          }
+      }
+  }
+  </code></pre>
+  <p>Penjelasan: </p>
+  <ul>
+    <li>Console.ReadLine() digunakan untuk menerima input pengguna.</li>
+    <li>Program akan terus meminta input hingga pengguna mengetikkan "exit", yang akan menghentikan perulangan dengan perintah break.</li>
+    <li>break menghentikan loop saat kondisi tertentu terpenuhi.</li>
+  </ul>
+
+  <p><span class="highlight"><h2>2. 💻Contoh Infinite Loop Tanpa Kondisi: </h2></span> <br> Berikut adalah contoh while (true) tanpa kondisi penghentian yang eksplisit, hanya berhenti ketika program dibunuh atau dihentikan secara eksternal:</p>
+  <pre><code>using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            while (true)
+            {
+                Console.WriteLine("Program sedang berjalan... tekan Ctrl+C untuk menghentikan.");
+                System.Threading.Thread.Sleep(1000);  // Menghentikan eksekusi sementara selama 1 detik
+            }
+        }
+    }
+    </code></pre>
+    <p>Penjelasan: </p>
+    <ul>
+      <li>Program akan mencetak pesan terus menerus setiap detik tanpa henti.</li>
+      <li>Thread.Sleep(1000) menghentikan sementara eksekusi program selama 1000 milidetik (1 detik) di setiap iterasi.</li>
+    </ul>
+
+    <h2>3. 💻 Contoh Program : Perulangan Tak Terbatas dengan <code>break</code></h2>
     <pre><code>using System;
 
 class Program {
@@ -151,7 +219,7 @@ class Program {
     }
 }</code></pre>
 
-    <h2>💻 Contoh Program 2: Menu Interaktif Sederhana</h2>
+    <h2>4. 💻 Contoh Program : Menu Interaktif Sederhana</h2>
     <pre><code>using System;
 
 class Program {
@@ -177,6 +245,20 @@ class Program {
     }
 }</code></pre>
 
+<h3>Menggunakan break untuk Menghentikan Infinite Loop</h3>
+<p>Perulangan <strong>while (true)</strong> sering digunakan dengan perintah <strong>break</strong> untuk mengendalikan kapan perulangan dihentikan, seperti pada contoh pertama. Hal ini memberikan fleksibilitas karena kita bisa menentukan kapan program harus berhenti berdasarkan kondisi runtime.</p>
+
+<h3>Bahaya Infinite Loop: </h3>
+<p>Jika tidak digunakan dengan hati-hati,<strong> while (true)</strong> bisa berbahaya karena perulangan yang tak berujung dapat menyebabkan program menggunakan sumber daya secara berlebihan, menyebabkan aplikasi menjadi tidak responsif, atau bahkan membuat sistem crash jika tidak diberhentikan dengan benar.</p>
+
+<h3>Penggunaan dalam program: </h3>
+<p><strong>While (true)</strong> sering digunakan dalam: </p>
+<ul>
+  <li>Server yang terus-menerus menerima permintaan dari klien.</li>
+  <li>Game atau aplikasi real-time yang perlu melakukan pengecekan atau pembaruan secara terus-menerus.</li>
+  <li>Aplikasi berbasis event di mana perulangan berjalan terus hingga program diberhentikan atau diberi perintah untuk berhenti.</li>
+</ul>
+
     <div class="simulator">
       <h2>🎮 Simulasi Perulangan</h2>
       <h3>Simulasi 1: Perulangan dengan <code>break</code></h3>
@@ -192,8 +274,6 @@ class Program {
     </div>
   </div>
 
-  <audio id="sound-success" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
-  <audio id="sound-error" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3"></audio>
 
   <script>
     for (let i = 0; i < 150; i++) {
