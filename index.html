@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perulangan while (true) di C#</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow-x: hidden;
+    }
+
+    .stars {
+      width: 2px;
+      height: 2px;
+      background: white;
+      position: absolute;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    pre {
+      background: #111;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: #00ffd5;
+    }
+
+    h1, h2, h3 {
+      color: #00ffe1;
+    }
+
+    .highlight {
+      color: #00ffd5;
+      font-weight: bold;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .simulator {
+      margin-top: 40px;
+      padding: 20px;
+      background: #222;
+      border-radius: 10px;
+    }
+
+    .simulator h3 {
+      margin-top: 20px;
+    }
+
+    .output-box {
+      background: #000;
+      padding: 15px;
+      margin-top: 10px;
+      height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      color: #0f0;
+      border: 1px solid #00ffe1;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #00ffe1;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #00c0b8;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔄 Penjelasan <span class="highlight">while (true)</span> dalam C#</h1>
+    <p><span class="highlight">while (true)</span> adalah jenis perulangan <strong>tak terbatas (infinite loop)</strong> yang akan terus berjalan <strong>selamanya</strong>, kecuali diberi <strong>perintah untuk keluar</strong> seperti <code>break</code>.</p>
+
+    <h2>✅ Kapan Digunakan?</h2>
+    <ul>
+      <li>Menjalankan program terus-menerus sampai ada kondisi tertentu (misalnya input pengguna).</li>
+      <li>Menunggu suatu kondisi eksternal (event).</li>
+      <li>Membuat menu interaktif yang terus muncul hingga user memilih keluar.</li>
+    </ul>
+
+    <h2>💡 Struktur Umum <code>while (true)</code></h2>
+    <pre><code>while (true)
+{
+    // Blok kode yang terus diulang
+    // Gunakan 'break' untuk keluar dari loop
+}</code></pre>
+
+    <h2>💻 Contoh Program 1: Perulangan Tak Terbatas dengan <code>break</code></h2>
+    <pre><code>using System;
+
+class Program {
+    static void Main() {
+        int i = 0;
+
+        while (true) {
+            Console.WriteLine("Perulangan ke-" + i);
+            i++;
+
+            if (i >= 5) {
+                break;  // Keluar dari loop setelah 5 kali
+            }
+        }
+    }
+}</code></pre>
+
+    <h2>💻 Contoh Program 2: Menu Interaktif Sederhana</h2>
+    <pre><code>using System;
+
+class Program {
+    static void Main() {
+        while (true) {
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1. Cetak Salam");
+            Console.WriteLine("2. Keluar");
+            Console.Write("Pilih menu (1/2): ");
+            string pilihan = Console.ReadLine();
+
+            if (pilihan == "1") {
+                Console.WriteLine("Halo, jadi ini adalah contoh menu interaktif sederhana!");
+            } else if (pilihan == "2") {
+                Console.WriteLine("Program selesai.");
+                break;
+            } else {
+                Console.WriteLine("Pilihan tidak valid. silahkan pilih angka 1 atau 2.");
+            }
+
+            Console.WriteLine(); // baris kosong
+        }
+    }
+}</code></pre>
+
+    <div class="simulator">
+      <h2>🎮 Simulasi Perulangan</h2>
+      <h3>Simulasi 1: Perulangan dengan <code>break</code></h3>
+      <button onclick="simulasiLoop()">Mulai Simulasi</button>
+      <button onclick="resetSimulasi()">Reset</button>
+      <div id="output" class="output-box"></div>
+
+      <h3>Simulasi 2: Menu Interaktif</h3>
+      <input type="text" id="userInput" placeholder="Ketik 1 atau 2..." />
+      <button onclick="menuLoopInput()">Kirim</button>
+      <button onclick="resetMenuInput()">Reset Menu</button>
+      <div id="menu-output" class="output-box"></div>
+    </div>
+  </div>
+
+  <audio id="sound-success" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+  <audio id="sound-error" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3"></audio>
+
+  <script>
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement('div');
+      star.classList.add('stars');
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      star.style.opacity = Math.random();
+      document.body.appendChild(star);
+    }
+
+    let count = 0;
+    let running = false;
+
+    function simulasiLoop() {
+      if (running) return;
+      running = true;
+      const output = document.getElementById("output");
+      output.innerHTML = "";
+
+      let interval = setInterval(() => {
+        output.innerHTML += `Perulangan ke-${count}<br>`;
+        output.scrollTop = output.scrollHeight;
+        count++;
+
+        if (count >= 5) {
+          output.innerHTML += `<strong>Loop dihentikan karena count >= 5 (break)</strong><br>`;
+          clearInterval(interval);
+          running = false;
+          document.getElementById("sound-success").play();
+        }
+      }, 500);
+    }
+
+    function resetSimulasi() {
+      document.getElementById("output").innerHTML = "";
+      count = 0;
+      running = false;
+    }
+
+    let menuRunning = true;
+
+    function menuLoopInput() {
+      if (!menuRunning) return;
+
+      const input = document.getElementById("userInput").value;
+      const output = document.getElementById("menu-output");
+
+      output.innerHTML += `Pilihan: ${input}<br>`;
+
+      if (input === "1") {
+        output.innerHTML += "Halo, jadi ini adalah contoh menu interaktif sederhana!<br><br>";
+        document.getElementById("sound-success").play();
+      } else if (input === "2") {
+        output.innerHTML += "Program selesai.<br><strong>Loop berhenti.</strong><br>";
+        menuRunning = false;
+        document.getElementById("sound-success").play();
+      } else {
+        output.innerHTML += "Pilihan tidak valid. silahkan pilih angka 1 atau 2.<br><br>";
+        document.getElementById("sound-error").play();
+      }
+
+      document.getElementById("userInput").value = "";
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function resetMenuInput() {
+      document.getElementById("menu-output").innerHTML = "";
+      menuRunning = true;
+    }
+  </script>
+</body>
+</html>
